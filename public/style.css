@@ -1,0 +1,11 @@
+
+body {
+	font-family:"Consolas","lucida grande",tahoma,arial,sans-serif;
+
+}
+
+#container {
+	display: block;
+	margin-top: 50px;
+	text-align: -webkit-center;
+}
