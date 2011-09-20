@@ -15,7 +15,7 @@ require 'uri'
 end
 
 get '/execute' do
-   websearch = "#{params[:post][:websearch]}"
+   websearch = "#{params[:websearch]}"
    params = websearch.split(' ')
    if params.length == 1
      if command_translator(websearch)

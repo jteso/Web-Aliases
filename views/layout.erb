@@ -7,11 +7,16 @@
 </head>
 <body id='container'>
 <!-- <img src='/url.png'> -->
-<form action="/execute" method="get">
-  <p><input type="text" name="post[websearch]" size="55" autocomplete="off"/></p>
+<form name="main_form" action="/execute" method="get">
+  <p><input type="text" name="websearch" size="55" autocomplete="off"/></p>
   <input type="submit" value="Go!">
 </form>
 <%= yield %>
 <!-- <div id='copyright'>Copyright &copy;<a href='http://jteso.com'>Javier Teso</a> 2011</div> -->
 </body>
+
+<script type="text/javascript" language="JavaScript">
+document.forms['main_form'].elements['websearch'].focus();
+</script>
+
 </html>
