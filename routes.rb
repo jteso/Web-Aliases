@@ -58,7 +58,8 @@ def url_translator(websearch, query)
                     :gt       => 'http://translate.google.com/?text={query}',
                     :gmail    => 'http://mail.google.com',
                     :amazon   => 'http://www.amazon.com/s?url=search-alias=aps&field-keywords={query}',
-                    :weather  => 'http://weather.yahoo.com/search/weather?location={query}'
+                    :weather  => 'http://weather.yahoo.com/search/weather?location={query}',
+                    :cba      => 'https://www.my.commbank.com.au/netbank/Logon/Logon.aspx'
                   }
   url_found = basic_searches[websearch.to_sym]
 

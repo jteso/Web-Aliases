@@ -6,6 +6,27 @@ body {
 
 #container {
 	display: block;
-	margin-top: 50px;
+	margin: 50px 0 30px 0;
 	text-align: -webkit-center;
+}
+
+p.thehook{
+	font-size: 16px;
+	letter-spacing: -0.05em;
+	color: #777;
+	font-variant: small-caps;
+}
+
+pre {
+	margin: 20px 0;
+	padding: 6px 4px 4px 6px;
+	border: 1px solid #EEE;
+	border-left-width: 20px;
+	overflow: auto;
+	color: #333;
+	background-color: #F9F9F9;
+}
+
+code{
+	color: #007A00
 }
