@@ -1,3 +1,3 @@
 require 'sinatra' 
-require 'routes'
+require './routes'
 run Sinatra.application
