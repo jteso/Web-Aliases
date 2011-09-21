@@ -3,18 +3,46 @@ body {
 	font-family:"Consolas","lucida grande",tahoma,arial,sans-serif;
 
 }
+#bodier p {
+	color: #555;
+	font-size: 0.88em;
+}
 
+input.search{
+	border : 1px solid #DDD;
+	border-top-color: #CCC;
+	border-bottom-color: #EAEAEA;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding: 3px 3px 3px 23px;
+	
+}
 #container {
 	display: block;
-	margin: 50px 0 30px 0;
+	margin: 50 auto;
 	text-align: -webkit-center;
+	max-width: 700px;
+}
+
+#footer{
+	clear: both;
+	color: #555;
+	font-size: 0.88888888em;
+	line-height: 1.5625;
+	border-top: 1px solid #DDD;
+	padding: 19px 0 0 0;
+	margin: 40px 0 20px 0;
+	text-align: center;
+	
 }
 
 p.thehook{
-	font-size: 16px;
-	letter-spacing: -0.05em;
-	color: #777;
-	font-variant: small-caps;
+	font-family: georgia, 'bitstream vera sans serif', 'lucida grande', helvetica, verdana, sans-serif;
+	font-weight: normal;
+	letter-spacing: -0.075em;
+	color: black;
+	font-size: 32px;
 }
 
 pre {
@@ -28,5 +56,6 @@ pre {
 }
 
 code{
-	color: #007A00
+	color: #007A00;
+	font-size: 1.66em;
 }

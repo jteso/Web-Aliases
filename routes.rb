@@ -5,7 +5,7 @@ require 'uri'
 # --------------------------------------------------
 # Routes
 # --------------------------------------------------
-
+                
 ['/', '/home'].each do |path|
   get path do
    # if session[:userid].nil? then erb :login 
@@ -39,6 +39,14 @@ get '/execute' do
 end
 
 get '/:command' do
+  # If required, pass the paramater to the view
+  if params[:command] == "alias"
+    @alias = basic_aliases
+  end
+  if params[:command] == "help"
+    @commands = basic_commands
+  end
+
   erb params[:command].to_sym
 end
 
@@ -46,20 +54,15 @@ end
 # --------------------------------------------------
 # Helpers
 # --------------------------------------------------
-def command_translator(websearch)
-  basic_commands = {':help' => '/help' }
-  basic_commands[websearch]
-end
 
-
-def url_translator(websearch, query)
-  
-  basic_searches = {
+def basic_aliases
+  basic_aliases = {
                     :g        => 'http://www.google.com/search?q={query}',
                     :gl       => 'http://www.google.com/search?btnI=I2+Feeling+Lucky&q={query}',
                     :gi       => 'http://images.google.com/search?q={query}&biw=1276&bih=702&tbm=isch',
                     :gm       => 'http://maps.google.com/maps?q={query}',
                     :gt       => 'http://translate.google.com/?text={query}',
+                    :gr       => 'http://www.google.com/reader',
                     :gmail    => 'http://mail.google.com',
                     :amazon   => 'http://www.amazon.com/s?url=search-alias=aps&field-keywords={query}',
                     :weather  => 'http://weather.yahoo.com/search/weather?location={query}',
@@ -67,6 +70,26 @@ def url_translator(websearch, query)
                     :as       => 'http://www.as.com',
                     :rdoc     => 'http://www.ruby-doc.org/core/classes/{query}.html',
                   }
+end
+
+def basic_commands
+  basic_commands = {
+                     ':help'  => '/help',
+                     ':date'  => '/date',
+                     ':alias' => '/alias'
+                    }
+end
+                  
+
+def command_translator(websearch)
+  commands = basic_commands
+  commands[websearch]
+end
+
+
+def url_translator(websearch, query)
+  basic_searches = basic_aliases
+  
   url_found = basic_searches[websearch.to_sym]
 
   if  url_found == nil

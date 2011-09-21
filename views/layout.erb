@@ -6,18 +6,22 @@
 	<link rel="stylesheet" type="text/css" href="/style.css"/> 
 </head>
 <body id='container'>
-<!-- <img src='/url.png'> -->
-<form name="main_form" action="/execute" method="get">
-  <p class="thehook"> Web Aliases</p>
-  <p><input type="text" name="websearch" size="55" autocomplete="off"/></p>
-  <input type="submit" value="Go!">
-</form>
-<%= yield %>
-<!-- <div id='copyright'>Copyright &copy;<a href='http://jteso.com'>Javier Teso</a> 2011</div> -->
+	<!-- <img src='/url.png'> -->
+	<div id="header">
+		<form name="main_form" action="/execute" method="get">
+		  <p class="thehook"> Web Aliases</p>
+		  <p><input class="search" type="text" name="websearch" size="65" autocomplete="off" spellcheck="false"/></p>
+		  <input type="submit" value="Go!">
+		</form>	
+	</div>
+	<div id="bodier">
+	<%= yield %>
+	</div>
+
 </body>
 
 <script type="text/javascript" language="JavaScript">
-document.forms['main_form'].elements['websearch'].focus();
+	document.forms['main_form'].elements['websearch'].focus();
 </script>
 
 </html>
