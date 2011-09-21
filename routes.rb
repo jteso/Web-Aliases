@@ -25,9 +25,15 @@ get '/execute' do
      end
    else
       command = params[0]
-      query   = params[1]
+      # build the parameter for command above
+      i = 2
+      query = params[1]
+      while i < params.length do
+        query = query + "+" + params[i]  
+        i +=1
+      end
 
-      redirect(url_translator(command, query))
+      redirect(url_translator(command, query.strip))
    end
    
 end
@@ -49,8 +55,6 @@ end
 def url_translator(websearch, query)
   
   basic_searches = {
-                    :as       => 'http://www.as.com',
-                    :rdoc     => 'http://www.ruby-doc.org/core/classes/{query}.html',
                     :g        => 'http://www.google.com/search?q={query}',
                     :gl       => 'http://www.google.com/search?btnI=I2+Feeling+Lucky&q={query}',
                     :gi       => 'http://images.google.com/search?q={query}&biw=1276&bih=702&tbm=isch',
@@ -59,7 +63,9 @@ def url_translator(websearch, query)
                     :gmail    => 'http://mail.google.com',
                     :amazon   => 'http://www.amazon.com/s?url=search-alias=aps&field-keywords={query}',
                     :weather  => 'http://weather.yahoo.com/search/weather?location={query}',
-                    :cba      => 'https://www.my.commbank.com.au/netbank/Logon/Logon.aspx'
+                    :cba      => 'https://www.my.commbank.com.au/netbank/Logon/Logon.aspx',
+                    :as       => 'http://www.as.com',
+                    :rdoc     => 'http://www.ruby-doc.org/core/classes/{query}.html',
                   }
   url_found = basic_searches[websearch.to_sym]
 
@@ -72,12 +78,21 @@ def url_translator(websearch, query)
  
 end
 
+
 def inject_param(url,param)
-  if param == nil
-    "http://" + URI.parse(url.gsub('{query}', '')).host
+  
+  if url.include? "{query}"
+     if param == nil
+       uri_split = URI.split(url.gsub('{query}','')) # making the URI valid
+       uri_split[0] + "://" + uri_split[2] 
+     else
+        url.gsub('{query}', param)
+     end
   else
-    url.gsub('{query}', param)
+    # static alias -- ignore 'param'
+    url
   end
+  
   
 end
 
