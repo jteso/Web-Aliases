@@ -1,0 +1,19 @@
+<table>
+	<tbody>
+		<tr>
+			<td>alias</td>
+			<td>website</td>
+		</tr>
+		<tr>
+			<td>-----</td>
+			<td>-------</td>
+		</tr>
+	<% @alias.each{ |key,url| %>
+		<tr>
+			<td> <%= key %> </td>
+			<td> <%= url %> </td>
+		</tr>
+	<% }%>
+
+	</tbody>
+</table>
