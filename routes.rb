@@ -32,7 +32,7 @@ get '/execute' do
         query = query + "+" + params[i]  
         i +=1
       end
-
+      puts "redirect #{command} #{query.strip}"
       redirect(url_translator(command, query.strip))
    end
    
@@ -93,7 +93,11 @@ def url_translator(websearch, query)
   url_found = basic_searches[websearch.to_sym]
 
   if  url_found == nil
-    fallback(websearch)
+    if query == nil
+      fallback(websearch)
+    else
+      fallback(websearch + "+" + query) 
+    end
   else
     inject_param(url_found, query)
   end
