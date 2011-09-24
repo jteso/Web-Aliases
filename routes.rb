@@ -135,8 +135,8 @@ def basic_aliases
                     :am       => 'http://www.amazon.com/s?url=search-alias=aps&field-keywords={query}',
                     :weather  => 'http://weather.yahoo.com/search/weather?location={query}',
                     :tw       => 'http://twitter.com',
-                    :twu      => 'http://twitter.com/#!/search/{query}', #search for users
-                    :twt      => 'http://twitter.com/#!/{query}', #search for terms
+                    :twt      => 'http://twitter.com/#!/search/{query}', #search for users
+                    :twu      => 'http://twitter.com/#!/{query}', #search for terms
                     :wiki     => 'http://en.wikipedia.org/wiki/{query_}',
                     :imdb     => 'http://www.imdb.com/find?s=all&q={query}',
                     :rt       => 'http://www.rottentomatoes.com/m/{query_}',
