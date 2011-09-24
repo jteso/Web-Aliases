@@ -8,10 +8,10 @@
 	</thead>
 	<tbody>
 	
-	<% @alias.each{ |key,url| %>
+	<% @aliases.each{ |entry| %>
 		<tr>
-			<td><b> <%= key %> </b></td>
-			<td> <%= url %> </td>
+			<td><b> <%= entry.alias %> </b></td>
+			<td> <%= entry.desc %> </td>
 		</tr>
 	<% }%>
 

@@ -2,13 +2,16 @@
 <table>
 	<thead>
 		<tr>
-			<th>Commands</th>
+			<th>Command</th>
+			<th>Description</th>
 		</tr>
+		
 	</thead>	
 	<tbody>
-		<% @commands.each{ |command,url| %>
+		<% @commands.each{ |command,value| %>
 			<tr>
 				<td> <%= command %> </td>
+				<td> <%= value[:desc] %></td>
 			</tr>
 		<% }%>
 
