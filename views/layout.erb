@@ -3,8 +3,7 @@
 <head>
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 	<title>aliases</title>
-	<link rel="stylesheet" type="text/css" href="/style.css"/> 
-	
+	<%= partial(:'partials/stylesheets') %>
 	<!-- google analytics> -->
 		<script type="text/javascript">
 
@@ -26,8 +25,8 @@
 	<!-- <img src='/url.png'> -->
 	<div id="header">
 		<form name="main_form" action="/execute" method="get">
-		  <p class="thehook"> Web Aliases</p>
-		  <p><input class="search" type="text" name="websearch" size="65" autocomplete="off" spellcheck="false"/></p>
+		  <a href='/home'>Web Aliases</a>
+		  <input class="search" type="text" name="websearch" size="65" autocomplete="off" spellcheck="false"/>
 		  <input type="submit" value="Go!">
 		</form>	
 	</div>

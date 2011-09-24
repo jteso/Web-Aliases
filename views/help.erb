@@ -1,16 +1,17 @@
+<p>
 <table>
+	<thead>
+		<tr>
+			<th>Commands</th>
+		</tr>
+	</thead>	
 	<tbody>
-		<tr>
-			<td>Commands</td>
-		</tr>
-		<tr>
-			<td>--------</td>
-		</tr>
 		<% @commands.each{ |command,url| %>
 			<tr>
 				<td> <%= command %> </td>
 			</tr>
 		<% }%>
 
-		</tbody>
-	</table>
+	</tbody>
+</table>
+</p	>

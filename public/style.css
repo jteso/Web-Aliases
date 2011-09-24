@@ -3,6 +3,14 @@ body {
 	font-family:"Consolas","lucida grande",tahoma,arial,sans-serif;
 
 }
+#header a:link, 
+#header a:visited {
+	text-decoration:none;
+	color: #717273;
+	font-variant: small-caps;
+	font-family: corbel, 'lucida grande', helvetica, sans-serif;
+	font-size:1.2em;	
+}
 #bodier p {
 	color: #555;
 	font-size: 0.88em;

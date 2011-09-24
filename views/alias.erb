@@ -1,13 +1,13 @@
+<p>
 <table>
+	<thead>
+		<tr>
+			<th>alias</th>
+			<th>website</th>
+		</tr>
+	</thead>
 	<tbody>
-		<tr>
-			<td>alias</td>
-			<td>website</td>
-		</tr>
-		<tr>
-			<td>-----</td>
-			<td>-------</td>
-		</tr>
+	
 	<% @alias.each{ |key,url| %>
 		<tr>
 			<td><b> <%= key %> </b></td>
@@ -17,3 +17,4 @@
 
 	</tbody>
 </table>
+</p>

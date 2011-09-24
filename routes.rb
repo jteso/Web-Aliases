@@ -5,11 +5,14 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-migrations'
+require './partialsupport.rb'
+
+helpers Sinatra::Partials
 
 # --------------------------------------------------
 # Model
 # --------------------------------------------------
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/alias.db")
+DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/alias.db")
 
 class Alias
   include DataMapper::Resource
