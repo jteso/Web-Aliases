@@ -51,7 +51,7 @@ class Alias
                        :gi       => {:desc => 'Search Google Images for {query}',:url=>'http://images.google.com/search?q={query}&biw=1276&bih=702&tbm=isch'},
                        :gm       => {:desc => 'Search Google Maps for {query}', :url=>'http://maps.google.com/maps?q={query}'},
                        :gt       => {:desc => 'Translate {query}',              :url=>'http://translate.google.com/?text={query}'},
-                       :gr       => {:desc => 'Open Google Reader',             :url=>'http://www.google.com/reader'},
+                       :gr       => {:desc => 'Open Google Reader',             :url=>'http://reader.google.com'},
                        :gml      => {:desc => 'Open GMail',                     :url=>'http://mail.google.com'},
                        :gn       => {:desc => 'Open Google News or Search News for {query}', :url=>'http://www.google.com/search?aq=f&hl=en&gl=au&tbm=nws&btnmeta_news_search=1&q={query}'},
                        :utb      => {:desc => 'Open Youtube or Search Videos for {query}',   :url=>'http://www.youtube.com/results?search_query={query}'},
