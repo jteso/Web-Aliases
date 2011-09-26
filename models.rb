@@ -63,7 +63,7 @@ class Alias
                        :imdb     => {:desc => 'Search IMDB  for {query}',       :url=>'http://www.imdb.com/find?s=all&q={query}'},
                        :rt       => {:desc => 'Search Rotten Tomatoes for {query}', :url=>'http://www.rottentomatoes.com/m/{query_}'},
                        :ebay     => {:desc => 'Search Ebay for {query}',        :url=>'http://www.ebay.com/sch/?_nkw={query}'},
-                       :lin      => {:desc => 'Open Linkedin or search users for {query}', :url=>'http://www.linkedin.com'},
+                       :lin      => {:desc => 'Open Linkedin or search users for {query}', :url=>'http://www.linkedin.com/commonSearch?type=people&keywords={query}'},
                        :fb       => {:desc => 'Open Facebook or search users for {query}', :url=>'http://www.facebook.com/search/?q={query}'},
                        :flkr     => {:desc => 'Open Flickr or search images for {query}',  :url=>'http://www.flickr.com/search/?q={query}&w=all'}
                      }
@@ -83,20 +83,24 @@ class Alias
   
   def self.fallback_url(param, params)
     fallback_url = 'http://www.google.com/search?q={query}'
+    puts "param= #{param}"
     query = param
-    if params.length > 1
-      query = query + "+" + params.join("+")
-    else
-      query = query + "+" + params[0]
+    if params != nil  
+      if params.length > 1
+        query = query + "+" + params.join("+")
+      else
+        query = query + "+" + params[0]
+      end
+      query = URI.escape(query, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end
     
-    query = URI.escape(query, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+    
     inject_query(fallback_url,query.split)
     
   end 
   
   def self.inject_query(url, queries)
-     if queries.length == 0
+     if queries.length == 0 || queries == nil
         remove_param_from_url(url,"{query}","{query_}")
      else
         if url.include? "{query}"

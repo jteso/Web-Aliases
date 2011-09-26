@@ -54,6 +54,7 @@ get '/execute' do
    params = tokens.slice(1, tokens.length) 
    puts "command_or_alias= #{command_or_alias}"
    puts "params = #{params}"
+   
    redirect universal_translator(command_or_alias,params)
 
    
@@ -109,13 +110,11 @@ end
 
 
 def url_translator(p_alias, params)
-  puts "url translator"
   url_found = Alias.url(p_alias)
   
   if  url_found == nil
     Alias.fallback_url(p_alias,params)
   else
-    puts "inject_query calling with url_found = #{url_found} and params=#{params}"
     Alias.inject_query(url_found, params)
   end
   
