@@ -85,12 +85,12 @@ class Alias
     fallback_url = 'http://www.google.com/search?q={query}'
     puts "param= #{param}"
     query = param
-    if params != nil  
-      if params.length > 1
+    if params != nil  && params.length > 0
+     # if params.length > 1
         query = query + "+" + params.join("+")
       #else
       #  query = query + "+" + params[0]
-      end
+      #end
       query = URI.escape(query, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end
     

@@ -47,14 +47,18 @@ end
 
 get '/execute' do
    command = "#{params[:command]}"
-   tokens = command.split(' ')
+   if command == nil or command.length == 0
+     redirect '/'
+   else
+     tokens = command.split(' ')
    
-   command_or_alias = tokens[0]
-   params = tokens.slice(1, tokens.length) 
-   puts "command_or_alias= #{command_or_alias}"
-   puts "params = #{params}"
+     command_or_alias = tokens[0]
+     params = tokens.slice(1, tokens.length) 
+     puts "command_or_alias= #{command_or_alias}"
+     puts "params = #{params}"
    
-   redirect universal_translator(command_or_alias,params)
+     redirect universal_translator(command_or_alias,params)
+   end
 
    
 end
