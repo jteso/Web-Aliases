@@ -88,8 +88,8 @@ class Alias
     if params != nil  
       if params.length > 1
         query = query + "+" + params.join("+")
-      else
-        query = query + "+" + params[0]
+      #else
+      #  query = query + "+" + params[0]
       end
       query = URI.escape(query, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end

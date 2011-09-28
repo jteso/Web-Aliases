@@ -5,6 +5,7 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-migrations'
+# require './pony_gmail.rb'
 require './partialsupport.rb'
 require './models.rb'
 
@@ -32,9 +33,7 @@ get '/migrateup' do
   Command.basic_commands.each do |key,value|
     Command.create(:name => "#{key}", :desc => "#{value[:desc]}", :url => "#{value[:url]}")
   end
-  
-  
-  
+
   redirect '/'  
 end
     
@@ -78,7 +77,25 @@ get '/add/:alias/:url/:desc' do
     a.save
     erb :add
 end
-
+###########################
+# CONTINUE HERE !!!!!!!!
+###########################
+# get '/email' do
+#  Pony.mail(:to=>"jtejob@gmail.com", 
+#            :from => 'tester@gmail.com', 
+#            :subject=> "howdy",
+#            :body => "Bug reported number 1",
+#            :via => :smtp, :smtp => {
+#              :host       => 'smtp.gmail.com',
+#              :port       => '587',
+#              :user       => 'jtejob@gmail.com',
+#              :password   => 'cdujteso200',
+#              :auth       => :plain,
+#              :domain     => "colonalias.com"
+#             }
+#           )
+#  "Email sent!"
+#end
 
 get '/:command' do
  
@@ -103,9 +120,7 @@ end
                   
 
 def command_translator(command)
-
   Command.url(command)
- 
 end
 
 
