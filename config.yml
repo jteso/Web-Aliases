@@ -1,0 +1,26 @@
+# ===========
+# DEVELOPMENT
+# ===========
+consumer_key:
+    QFhj2WNACqVaxLf6xJl64Q
+consumer_secret:
+    uR3C7LArNaHxpn5B4RuHdvHujIn3vadKKvbgxLJxA
+callback_url:
+    http://127.0.0.1:9393/authenticated
+
+
+# authorize_url = https://api.twitter.com/oauth/authorize    
+# access_token_url = 	https://api.twitter.com/oauth/access_token
+
+
+
+# ===========
+# PRODUCTION
+# ===========
+
+#consumer_key:
+#    Ljkd67jwyPOU9N38KDleUQ
+#consumer_secret:
+#    Hzd1G7bam64vUK0aTjQpoX9cYayP2SzhdV8wMmJIfA
+#callback_url:
+#    http://aliases.heroku.com/authenticated

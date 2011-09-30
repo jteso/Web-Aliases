@@ -19,8 +19,10 @@ class Command
   def self.basic_commands
     basic_commands = {
                        ':help'  => {:desc => 'Show a list of all available commands',  :url=>'/help'},
-                       ':date'  => {:desc => 'Display Date and Time',                  :url=>'/date'},
-                       ':alias' => {:desc => 'Show all aliases available',             :url=>'/alias'}
+                       ':login -t'  => {:desc => 'Login using your twitter account',   :url=>'/signin_with_twitter'},
+                       ':logout'  => {:desc => 'Logout',                               :url=>'/signout'},
+                       ':alias' => {:desc => 'Show all aliases available',             :url=>'/alias'},
+                       
                       }
   end
   

@@ -22,12 +22,17 @@
 
 </head>
 <body id='container'>
-	<!-- <img src='/url.png'> -->
+	
 	<div id="header">
 		<form name="main_form" action="/execute" method="get">
-		  <a href='/home'>Web Aliases</a>
+		  <span id="header_logo">WEB_LINKS</span>
 		  <input class="search" type="text" name="command" size="65" autocomplete="off" spellcheck="false"/>
-		  <input type="submit" value="Go!">
+		  <a class="button" href="javascript: submitform()"><span>Go!</span></a>
+	      	<% if @user %>
+			 		<span class="head_user">Logged as: <%=  @profile_name  %></span>			
+			  <% else %>
+					<a href="/signin_with_twitter" style="text-decoration:none;"><span class="head_user">Log in &rarr;</span></a>	
+			  <% end %>
 		</form>	
 	</div>
 	<div id="bodier">
@@ -39,6 +44,13 @@
 <!-- get initial focus on search text -->
 <script type="text/javascript" language="JavaScript">
 	document.forms['main_form'].elements['command'].focus();
+	function submitform()
+	{
+		document.main_form.submit();
+	}
+</script>
+<script type="text/javascript" language="JavaScript">
+
 </script>
 
 </html>
