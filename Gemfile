@@ -4,5 +4,5 @@ gem 'datamapper'
 gem 'dm-sqlite-adapter'
 gem 'dm-postgres-adapter'
 gem 'pony'
-gem 'twitter_oath'
+gem 'twitter_oauth'
 
