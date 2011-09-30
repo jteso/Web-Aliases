@@ -94,8 +94,8 @@ get '/execute' do
    
        command_or_alias = tokens[0]
        params = tokens.slice(1, tokens.length) 
-       puts "command_or_alias= #{command_or_alias}"
-       puts "params = #{params}"
+       #puts "command_or_alias= #{command_or_alias}"
+       #puts "params = #{params}"
    
        redirect universal_translator(command_or_alias,params)
      end

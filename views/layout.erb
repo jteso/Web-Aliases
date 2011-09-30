@@ -25,13 +25,14 @@
 	
 	<div id="header">
 		<form name="main_form" action="/execute" method="get">
-		  <span id="header_logo">WEB_LINKS</span>
+		  <span id="header_logo"></span>
 		  <input class="search" type="text" name="command" size="65" autocomplete="off" spellcheck="false"/>
 		  <a class="button" href="javascript: submitform()"><span>Go!</span></a>
 	      	<% if @user %>
-			 		<span class="head_user">Logged as: <%=  @profile_name  %></span>			
+			 		<span class="head_user"><%=  @profile_name  %> |</span>
+				    <a href="/signout" style="text-decoration:none;"><span class="head_user">Log out &rarr;</span></a>			
 			  <% else %>
-					<a href="/signin_with_twitter" style="text-decoration:none;"><span class="head_user">Log in &rarr;</span></a>	
+					<a href="/signin_with_twitter" style="text-decoration:none;"><span class="head_user">Log in with Twitter &rarr;</span></a>	
 			  <% end %>
 		</form>	
 	</div>
