@@ -23,13 +23,6 @@ end
 # Filters
 # --------------------------------------------------
 before do
-  puts "+==============+"
-  puts "| CONFIGURATION |"
-  puts "+==============+"
-  puts "request.path_info = #{request.path_info}"
-  puts "consumer_key= #{@@config['consumer_key']}"
-  puts "consumer_secret= #{@@config['consumer_secret']}"
-  puts "callback_url= #{@@config['callback_url']}"
   
   @user = session[:user]
   @client = TwitterOAuth::Client.new(
@@ -39,7 +32,6 @@ before do
     :secret => session[:secret_token]
   )
   if @user  
-    p @client.info 
     @profile_image_url = @client.info['profile_image_url']
     @profile_name      = @client.info['screen_name']
   end
