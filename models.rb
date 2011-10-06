@@ -159,6 +159,6 @@ class Alias
   
 end
 
-DataMapper.finalize.auto_upgrade!
+#DataMapper.finalize.auto_upgrade!
 
-#DataMapper.finalize.auto_migrate!
+DataMapper.finalize.auto_migrate!

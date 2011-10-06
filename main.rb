@@ -50,7 +50,6 @@ get '/reset' do
   session[:user] = nil
   
   #Delete all instances from the repository
-  DataMapper.finalize.auto_migrate!
   
   User.destroy
   Alias.destroy
