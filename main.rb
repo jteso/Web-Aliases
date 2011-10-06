@@ -60,7 +60,7 @@ get '/reset' do
   user = User.find('everybody')
   
   Alias.basic_aliases.each do |key,value|
-    Alias.create(:user =>  user, :alias => "#{key}", :url  => "#{value[:url]}",  :desc => "#{value[:desc]}",
+    a= Alias.create(:user =>  user, :alias => "#{key}", :url  => "#{value[:url]}",  :desc => "#{value[:desc]}",
                  :created_at => Time.now, :updated_at => Time.now)
   end  
   

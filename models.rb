@@ -38,7 +38,7 @@ class Command
   def self.basic_commands
     basic_commands = {
                        ':help'  => {:desc => 'Show a list of all available commands',  :url=>'/help'},
-                       ':login -t'  => {:desc => 'Login using your twitter account',   :url=>'/signin_with_twitter'},
+                       ':login'  => {:desc => 'Login using your twitter account',   :url=>'/signin_with_twitter'},
                        ':logout'  => {:desc => 'Logout',                               :url=>'/signout'},
                        ':alias' => {:desc => 'Show all aliases available',             :url=>'/alias'},
                        ':addalias' => {:desc => 'Create a new alias ',                 :url=>'/addalias'}
@@ -159,6 +159,6 @@ class Alias
   
 end
 
-#DataMapper.finalize.auto_upgrade!
+DataMapper.finalize.auto_upgrade!
 
-DataMapper.finalize.auto_migrate!
+#DataMapper.finalize.auto_migrate!
