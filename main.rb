@@ -10,6 +10,8 @@ require './partialsupport.rb'
 require './models.rb'
 
 helpers Sinatra::Partials
+#set :sessions, true
+#use Rack::Flash
 
 # --------------------------------------------------
 # Configuration: Run Once in any environment
@@ -48,12 +50,16 @@ get '/reset' do
   session[:user] = nil
   
   #Delete all instances from the repository
+  User.destroy
   Alias.destroy
   Command.destroy
   
   #Load up initial aliases & commands
+  
+  user = User.find('everybody')
+  
   Alias.basic_aliases.each do |key,value|
-    Alias.create(:user =>  "jteso", :alias => "#{key}", :url  => "#{value[:url]}",  :desc => "#{value[:desc]}",
+    Alias.create(:user =>  user, :alias => "#{key}", :url  => "#{value[:url]}",  :desc => "#{value[:desc]}",
                  :created_at => Time.now, :updated_at => Time.now)
   end  
   
@@ -67,7 +73,7 @@ end
                 
 ['/', '/home'].each do |path|
   get path do
-    redirect '/alias'
+    erb :home
   end
 end
 
@@ -80,8 +86,10 @@ get '/execute' do
      puts "command is  #{command}"
      command_url = command_translator command
      if command_url
+       puts "command_url is TRUE"
        redirect command_url
      else
+        puts "command_url is FALSE"
        tokens = command.split(' ')
    
        command_or_alias = tokens[0]
@@ -95,24 +103,50 @@ get '/execute' do
 
    
 end
-  
-get '/add/:alias/:url/:desc' do
-    
-    _alias = "#{params[:alias]}"
-    #sanitising url
-    _url   = "#{params[:url]}"
-    _url   = "http://" + _url unless "#{params[:url]}".include? ("http://")
-    _desc  = "#{params[:desc]}"
-    
-    a = Alias.new
-    a.user       = "jteso"
-    a.alias      = _alias
-    a.url        = _url
-    a.desc       = _desc
-    a.created_at = Time.now
-    a.updated_at = Time.now
-    a.save
+
+get '/addalias' do
+  if @user
     erb :add
+  else
+    erb :home
+  end
+  
+end
+
+   
+post '/add' do
+    if @user
+      _alias = "#{params[:alias]}"
+      #sanitising url
+      _url   = "#{params[:url]}"
+      _url   = "http://" + _url unless "#{params[:url]}".include? ("http://") or "#{params[:url]}".include? ("https://")
+      _desc  = "#{params[:desc]}"
+    
+      user = User.find(@profile_name)
+      
+     
+      if user.new? 
+        #load up the basic aliases
+        Alias.basic_aliases.each do |key,value|
+            puts "Alias #{key} being added to user=#{user.identifier}"
+            Alias.create(:user =>  user, :alias => "#{key}", :url  => "#{value[:url]}",  :desc => "#{value[:desc]}",
+                         :created_at => Time.now, :updated_at => Time.now)
+        end
+      end
+      
+      a = Alias.new
+      a.user       = user
+      a.alias      = _alias
+      a.url        = _url
+      a.desc       = _desc
+      a.created_at = Time.now
+      a.updated_at = Time.now
+      a.save
+
+      redirect '/alias'
+  else
+    redirect '/'
+  end
 end
 ###########################
 # CONTINUE HERE !!!!!!!!
@@ -181,7 +215,12 @@ get '/timeline' do
 end
 
 get '/alias' do
-  @aliases = Alias.all(:user => 'jteso')
+  if @user
+      @aliases = Alias.all(:user => User.find(@profile_name))
+  else
+      @aliases = Alias.all(:user => User.find('everybody'))
+  end
+    
   erb :alias
 end
 
@@ -213,7 +252,8 @@ end
 
 def url_translator(p_alias, params)
   url_found = Alias.url(p_alias)
-  
+  puts "url found=#{url_found}"
+  puts "params=#{params}"
   if  url_found == nil
     Alias.fallback_url(p_alias,params)
   else

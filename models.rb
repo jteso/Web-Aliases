@@ -9,6 +9,25 @@ require 'uri'
 # Model
 # --------------------------------------------------
 DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/alias.db")
+class User
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :email,      String, :length => 255
+  property :nickname,   String, :length => 255
+  property :identifier, String, :length => 255
+  property :photo_url,  String, :length => 255
+
+  has n, :aliases
+  
+  def self.find(identifier)
+    u = first(:identifier => identifier)
+    u = new(:identifier => identifier) if u.nil?
+    return u
+  end
+  
+end
+
 class Command
   include DataMapper::Resource
   property :id,     Serial
@@ -22,6 +41,8 @@ class Command
                        ':login -t'  => {:desc => 'Login using your twitter account',   :url=>'/signin_with_twitter'},
                        ':logout'  => {:desc => 'Logout',                               :url=>'/signout'},
                        ':alias' => {:desc => 'Show all aliases available',             :url=>'/alias'},
+                       ':addalias' => {:desc => 'Create a new alias ',                 :url=>'/addalias'}
+                       
                        
                       }
   end
@@ -36,12 +57,13 @@ end
 class Alias
   include DataMapper::Resource
   property :id,         Serial
-  property :user,       Text, :required => true
   property :alias,      Text, :required => true
   property :url,        Text, :required => true
   property :desc,       Text, :default => 'Not Available'
   property :created_at, DateTime
   property :updated_at, DateTime
+  
+  belongs_to :user
   
   def self.basic_aliases
     basic_aliases = {
@@ -103,7 +125,7 @@ class Alias
   
   def self.inject_query(url, queries)
      if queries.length == 0 || queries == nil
-        remove_param_from_url(url,"{query}","{query_}")
+        return (url.include? "{query}" or url.include? "{query_}")? remove_param_from_url(url,"{query}","{query_}") : url
      else
         if url.include? "{query}"
           url.gsub('{query}', build_query_to_replace("+",queries))
