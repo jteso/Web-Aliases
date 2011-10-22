@@ -36,7 +36,13 @@
 			  <% end %>
 		</form>	
 	</div>
-	<div id="bodier">
+  <div id="bodier">
+    <div id="notification">
+      <% if flash[:error] %>
+        <p class="alert"><%= flash[:error] %> </p>
+      <% end %>
+
+    </div>
 	<%= yield %>
 	</div>
 

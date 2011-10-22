@@ -5,20 +5,21 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-migrations'
+require 'rack-flash'
 require 'twitter_oauth'
 require './partialsupport.rb'
 require './models.rb'
 
 helpers Sinatra::Partials
-#set :sessions, true
-#use Rack::Flash
+use Rack::Session::Cookie
+enable :sessions
+use Rack::Flash
 
 # --------------------------------------------------
 # Configuration: Run Once in any environment
 # --------------------------------------------------
 configure do
-  set :sessions, true
-  @@config = YAML.load_file("config.yml") rescue nil || {}
+   @@config = YAML.load_file("config.yml") rescue nil || {}
 end
 
 # --------------------------------------------------
@@ -109,6 +110,7 @@ get '/addalias' do
   if @user
     erb :add
   else
+    flash.now[:error]= 'You need to be logged in to add aliases'
     erb :home
   end
   
@@ -177,7 +179,7 @@ get '/signin_with_twitter' do
   session[:request_token] = request_token.token
   session[:request_token_secret] = request_token.secret
   
-  redirect request_token.authorize_url # dont think we have to replace this substring as per developer suggests
+  redirect request_token.authorize_url 
 end
 
 get '/signout' do

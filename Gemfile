@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 gem 'sinatra'
+gem 'rack-flash'
 gem 'datamapper'
 gem 'dm-sqlite-adapter'
 gem 'dm-postgres-adapter'
